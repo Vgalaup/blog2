@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home!{% endblock %}
+{% block body %}
+<div class="container" id="postsDisplayed">
+    <div class="d-flex flex-row justify-content-around flex-wrap mb-2 mt-5">
+        {% for post in posts|slice(0,3) %}
+        <div class="card mb-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content|slice(0, 250)}}
+                    {% if post.content|length >250 %}
+                    ...
+                    {% endif %}
+                </p>
+                <a href="{{path('onePost',{id:post.id})}}">Read More</a>
+                <div class="card-footer text-muted">
+                    <p><a href="{{path('postFromUser',{id:post.author.id})}}">{{post.author.name}}</a></p>
+                    <p>Published on: {{post.date|date("m/d/Y")}}</p>
+                    <p> Category: <a href="{{path('Category',{id:post.category.id})}}">{{post.category.name}}</a>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% block javascript %}
+<script type="text/javascript">
+    let counter = 3;
+
+    let viewMorePosts = document.querySelector('#viewMorePosts')
+    let postsDisplayed = document.querySelector('#postsDisplayed')
+
+
+    function displayNewPosts(newdata) {
+        console.log(newdata);
+        let newPosts = document.createElement("span");
+        newPosts.innerHTML = newdata;
+        postsDisplayed.append(newPosts);
+        counter += 10
+    }
+
+
+    window.addEventListener('scroll', (event) => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            console.log(counter)
+            fetch("http://localhost:8000/post/displayPosts/" + counter)
+                .then(response => response.text())
+                .then(data => displayNewPosts(data))
+        }
+    })
+
+</script>
+{% endblock %}
+{% endblock %}

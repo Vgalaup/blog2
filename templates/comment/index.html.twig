@@ -1,0 +1,7 @@
+<div class="container">
+    <p>{{comment.content}}</p>
+    <div class="card-footer text-muted">
+        <p>Authored by: <a href="{{path('postFromUser',{id:comment.author.id})}}">{{comment.author.name}}</a></p>
+        <p>Published on: {{comment.date|date("m/d/Y h:m")}}</p>
+    </div>
+</div>

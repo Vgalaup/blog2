@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{category.name}}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="d-flex flex-row justify-content-around flex-wrap mb-2">
+        <h1>{{category.name}}</h1>
+        <h2>{{category.description}}</h2>
+
+        {% for post in category.posts %}
+
+        <div class="card mb-4 mt-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.content|slice(0, 250)}}
+                    {% if post.content|length >250 %}
+                    ...
+                    {% endif %}
+                </p>
+                <a href="{{path('onePost',{id:post.id})}}">Read More</a>
+                <div class="card-footer text-muted">
+                    <p>Authored by: <a href="{{path('postFromUser',{id:post.author.id})}}">{{post.author.name}}</a></p>
+                    <p>Published on: {{post.date|date("m/d/Y")}}</p>
+                    <p>Category: <a href="{{path('Category',{id:post.category.id})}}">{{post.category.name}}</a>
+                </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Awesome Blog{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <Link rel="styleSheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css" />
+    <Link rel="styleSheet" href="{{asset('css/style.css')}}" type="text/css" />
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{path('home')}}">Awesome Blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{path('home')}}">Articles <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('newPost')}}">Write</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('profile')}}">Profile</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <button class="btn btn-primary"><a class="nav-link"
+                                href="{{path('logout')}}">Logout</a></button>
+                        {% endif %}
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') == false %}
+                        <button class="btn btn-primary"><a class="nav-link" href="{{path('login')}}">Login</a></button>
+                        <button class="btn btn-primary"><a class="nav-link" href="{{path('app_register')}}">Sign
+                                up</a></button>
+                        {% endif %}
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1>Welcome {{app.user.name}}</h1>
+        {% endif %}
+
+    </header>
+    {% block body %}
+    {% endblock %}
+
+</body>
+
+</html>

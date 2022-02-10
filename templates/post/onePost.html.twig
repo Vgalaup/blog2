@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post: {{post.title}}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{post.title}}</h1>
+    <p>{{post.content}}</p>
+
+    <div class="card-footer text-muted">
+        <p>Authored by: <a href="{{path('postFromUser',{id:post.author.id})}}">{{post.author.name}}</a></p>
+        <p>Published on: {{post.date|date("m/d/Y")}}</p>
+        <p> Category: <a href="{{path('Category',{id:post.category.id})}}">{{post.category.name}}</a>
+    </div>
+</div>
+
+<div>
+    <h3>Comment:</h3>
+    {{form(form)}}
+</div>
+
+<div id='commentDisplayed'>
+    {% for comment in comments %}
+    <div class="container">
+        <p>{{comment.content}}</p>
+        <div class="card-footer text-muted">
+            <p>Authored by: <a href="{{path('postFromUser',{id:comment.author.id})}}">{{comment.author.name}}</a></p>
+            <p>Published on: {{comment.date|date("m/d/Y h:m")}}</p>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+</div>
+{% block javascripts %}
+<script type="text/javascript">
+    let comment_save = document.querySelector('#comment_save');
+    let commentDisplayed = document.querySelector('#commentDisplayed')
+
+    function displayNewComment(newdata) {
+        let newComment = document.createElement("span");
+        newComment.innerHTML = newdata;
+        document.body.insertBefore(newComment, commentDisplayed);
+    }
+
+    comment_save.addEventListener('click', (event) => {
+        let comment_content = document.querySelector('#comment_content').value;
+        event.preventDefault()
+
+        fetch("http://localhost:8000/comment/" + comment_content + "/{{post.id}}")
+            .then(response => response.text())
+            .then(data => displayNewComment(data))
+    })
+
+</script>
+{% endblock %}
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}dqs{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="d-flex flex-row justify-content-around flex-wrap mb-2">
+        {% for post in posts %}
+
+
+        {{post.title}} {{post.date|date("m/d/Y")}}
+
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
