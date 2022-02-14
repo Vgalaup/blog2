@@ -5,6 +5,9 @@
 {% block body %}
 <div class="container">
     <h1>{{post.title}}</h1>
+    {% if post.image != "" %}
+    <img class="card-img-top" src="{{ asset('images/') ~ post.image }}">
+    {% endif %}
     <p>{{post.content}}</p>
 
     <div class="card-footer text-muted">

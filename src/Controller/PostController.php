@@ -32,6 +32,15 @@ class PostController extends AbstractController
             $post = $form->getData();
             $post->setAuthor($this->getUser());
             $post->setDate(new \DateTime());
+
+            $image = $form['image']->getData();
+            $extension = $image->guessExtension();
+
+            if ($extension == "jpg" || $extension == "png" || $extension == "jpeg" || $extension == "svg") {
+                $filename = $image->getClientOriginalName() . rand(1, 99999) . '.' . $extension;
+                $image->move("images", $filename);
+            }
+            $post->setImage($filename);
             $entityManager = $doctrine->getManager();
 
             $entityManager->persist($post);
