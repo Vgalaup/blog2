@@ -3,12 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Length;
+
 
 class CategoryController extends AbstractController
 {
@@ -24,28 +23,14 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/categories/{fewId}', name: 'FewCategory')]
-    public function postFromCategories(ManagerRegistry $doctrine, string $fewId): Response
-    {
-        $processedId = explode('-', $fewId);
 
-        for ($i = 0; $i < count($processedId); $i++) {
-
-            $category = $doctrine->getRepository(Category::class)->find($processedId[$i]);
-            $categories[] = $category;
-        }
-
-
-        return $this->render('category/categories.html.twig', [
-            'categories' => $categories
-        ]);
-    }
 
 
     #[Route('/category', name: 'categories')]
     public function index(ManagerRegistry $doctrine): Response
     {
         $categories = $doctrine->getRepository(Category::class)->findAll();
+
 
         return $this->render('category/categories.html.twig', [
             'controller_name' => 'CategoryController',

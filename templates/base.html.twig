@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Awesome Blog{% endblock %}</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
     <Link rel="styleSheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css" />
+    {% endblock %}
     <Link rel="styleSheet" href="{{asset('css/style.css')}}" type="text/css" />
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{path('home')}}">Awesome Blog</a>
+            <a class="navbar-brand" href="{{path('home')}}">An Awesome Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,6 +38,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('profile')}}">Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('myPosts')}}">My Posts</a>
+                    </li>
+
                     {% endif %}
 
 
@@ -51,8 +56,7 @@
                         <a class="nav-link btn btn-primary" href="{{path('login')}}">Login</a>
                     </li>
                     <li class="nav-item ml-3"><a class="nav-link btn btn-primary" href="{{path('app_register')}}">Sign
-                            up</a>
-                    </li>
+                            up</a></li>
                     {% endif %}
 
 
@@ -61,7 +65,7 @@
             </div>
         </nav>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <h1>Welcome {{app.user.name}}</h1>
+        <p>Welcome {{app.user.name}}</p>
         {% endif %}
 
     </header>

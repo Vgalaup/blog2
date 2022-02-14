@@ -121,4 +121,18 @@ class PostController extends AbstractController
             'posts' => $posts,
         ]);
     }
+
+
+    #[Route('/myPosts', name: 'myPosts')]
+    public function index(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        $user = $this->getUser();
+
+        return $this->renderForm('post/myposts.html.twig', [
+            'controller_name' => 'ProfileController',
+            'user' => $user,
+        ]);
+    }
 }

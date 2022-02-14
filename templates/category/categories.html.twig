@@ -11,7 +11,33 @@
 
         {% for post in category.posts|slice(0, 12) %}
 
-        {% include "home/displayPosts.html.twig" %}
+
+        <div class="card mb-4" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                {% if post.image != "" %}
+                <img class="card-img-top" src="{{ asset('images/') ~ post.image }}">
+                {% endif %}
+                <p class="card-text">{{post.content|slice(0, 250)}}
+                    {% if post.content|length >250 %}
+                    ...
+                    {% endif %}
+                </p>
+                <a href="{{path('onePost',{id:post.id})}}">Read More</a>
+                <div class="card-footer text-muted">
+                    <p>Authored by: <a href="{{path('postFromUser',{id:post.author.id})}}">{{post.author.name}}</a>
+                    </p>
+                    <p>Published on: {{post.date|date("m/d/Y")}}</p>
+                    <p> Category: <a href="{{path('Category',{id:post.category.id})}}">{{post.category.name}}</a>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
 
         {% endfor %}
     </div>

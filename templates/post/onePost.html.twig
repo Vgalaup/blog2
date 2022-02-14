@@ -16,7 +16,7 @@
         <p> Category: <a href="{{path('Category',{id:post.category.id})}}">{{post.category.name}}</a>
     </div>
 </div>
-
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 <div>
     <h3>Comment:</h3>
     {{form(form)}}
@@ -33,7 +33,7 @@
     </div>
 
     {% endfor %}
-
+    {% endif %}
 
 </div>
 {% block javascripts %}
