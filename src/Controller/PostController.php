@@ -19,15 +19,6 @@ class PostController extends AbstractController
     #[Route('/post/new', name: 'newPost')]
     public function newPost(Request $request, ManagerRegistry $doctrine): Response
     {
-        // Premiere solution:
-
-        // $securityContext = $this->container->get('security.authorization_checker');
-
-        // if ($securityContext->isGranted('IS_AUTHENTICATED_FULLY') == false) {
-        //     return $this->redirectToRoute('home');
-        // }
-
-        // DEUXIEME SOLUTION:
 
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 

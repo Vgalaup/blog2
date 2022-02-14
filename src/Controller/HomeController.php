@@ -18,7 +18,6 @@ class HomeController extends AbstractController
         $session = [];
         $element = $doctrine->getRepository(Category::class)->find($id);
         if (in_array($element, $session)) {
-            // foo is in the array
         } else {
             $session[] = $element;
         }

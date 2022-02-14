@@ -4,7 +4,7 @@
 {% block body %}
 <div class="container" id="postsDisplayed">
     <div class="d-flex flex-row justify-content-around flex-wrap mb-2 mt-5">
-        {% for post in posts|slice(0,3) %}
+        {% for post in posts|slice(0,13) %}
         <div class="card mb-4" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{post.title}}</h5>
