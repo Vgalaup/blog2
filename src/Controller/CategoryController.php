@@ -43,10 +43,13 @@ class CategoryController extends AbstractController
 
 
     #[Route('/category', name: 'categories')]
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
-        return $this->render('category/index.html.twig', [
+        $categories = $doctrine->getRepository(Category::class)->findAll();
+
+        return $this->render('category/categories.html.twig', [
             'controller_name' => 'CategoryController',
+            'categories' => $categories
         ]);
     }
 }

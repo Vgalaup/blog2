@@ -78,6 +78,7 @@ class PostController extends AbstractController
         $user = $doctrine->getRepository(User::class)->find($id);
         $posts = $user->getPosts();
 
+
         return $this->render('post/postFromUser.html.twig', [
             'posts' => $posts,
             'author' => $user,
@@ -105,6 +106,7 @@ class PostController extends AbstractController
     public function postByDay(ManagerRegistry $doctrine, $date): Response
     {
         $posts = $doctrine->getRepository(Post::class)->findAllByDay($date);
+
 
         return $this->render('post/postByDay.html.twig', [
             'posts' => $posts,

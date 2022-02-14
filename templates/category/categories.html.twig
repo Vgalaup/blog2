@@ -9,7 +9,7 @@
         <h1>{{category.name}}</h1>
         <h2>{{category.description}}</h2>
 
-        {% for post in category.posts %}
+        {% for post in category.posts|slice(0, 12) %}
 
         <div class="card mb-4 mt-4" style="width: 18rem;">
             <div class="card-body">
@@ -29,7 +29,11 @@
 
             </div>
         </div>
+
         {% endfor %}
+    </div>
+    <div class="text-center mb-5">
+        <a class="btn btn-primary " href="{{path('Category',{id:category.id})}}">See more from this category</a>
     </div>
     {% endfor %}
     {% endblock %}

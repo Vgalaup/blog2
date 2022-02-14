@@ -15,7 +15,7 @@
                 </p>
                 <a href="{{path('onePost',{id:post.id})}}">Read More</a>
                 <div class="card-footer text-muted">
-                    <p><a href="{{path('postFromUser',{id:post.author.id})}}">{{post.author.name}}</a></p>
+                    <p>Authored by: <a href="{{path('postFromUser',{id:post.author.id})}}">{{post.author.name}}</a></p>
                     <p>Published on: {{post.date|date("m/d/Y")}}</p>
                     <p> Category: <a href="{{path('Category',{id:post.category.id})}}">{{post.category.name}}</a>
                     </p>
