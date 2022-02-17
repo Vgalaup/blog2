@@ -35,19 +35,22 @@ class PostController extends AbstractController
             $post->setAuthor($this->getUser());
             $post->setDate(new \DateTime());
 
-            $image = $form['image']->getData();
-            $extension = $image->guessExtension();
 
-            if ($extension == "jpg" || $extension == "png" || $extension == "jpeg" || $extension == "svg") {
-                $filename = $image->getClientOriginalName() . rand(1, 99999) . '.' . $extension;
-                $image->move("images", $filename);
+            $image = $form['image']->getData();
+            if ($image !== null) {
+                $extension = $image->guessExtension();
+
+                if ($extension == "jpg" || $extension == "png" || $extension == "jpeg" || $extension == "svg") {
+                    $filename = $image->getClientOriginalName() . rand(1, 99999) . '.' . $extension;
+                    $image->move("images", $filename);
+                }
+                $post->setImage($filename);
             }
-            $post->setImage($filename);
             $entityManager = $doctrine->getManager();
 
             $entityManager->persist($post);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Article Created! Knowledge is power!');
             return $this->redirectToRoute('newPost');
         }
 

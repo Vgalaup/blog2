@@ -4,11 +4,11 @@
 {% block body %}
 <div class="container" id="postsDisplayed">
     <div class="d-flex flex-row justify-content-around flex-wrap mb-2 mt-5">
-        {% for post in posts|slice(0,6) %}
+        {% for post in posts|slice(0,12) %}
 
         <div class="card mb-4" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
+                <h3 class="card-title">{{post.title}}</h3>
                 {% if post.image != "" %}
                 <img class="card-img-top" src="{{ asset('images/') ~ post.image }}">
                 {% endif %}
@@ -48,7 +48,7 @@
         let newPosts = document.createElement("span");
         newPosts.innerHTML = newdata;
         postsDisplayed.append(newPosts);
-        counter += 6
+        counter += 2
     }
 
 

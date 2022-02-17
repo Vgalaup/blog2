@@ -19,20 +19,22 @@ class CommentController extends AbstractController
     {
         $post = $doctrine->getRepository(Post::class)->find($postId);
 
+        //Sets the $content variable to a object of type Comment 
         $comment = new Comment;
-
+        //Fills the object with the right data 
         $comment->setContent($content);
         $comment->setAuthor($this->getUser());
         $comment->setPost($post);
         $comment->setDate(new \DateTime());
 
         $entityManager = $doctrine->getManager();
+        // saves the object in the server's memory
         $entityManager->persist($comment);
+        // send the object in the database
         $entityManager->flush();
 
         return $this->render('comment/index.html.twig', [
-            'controller_name' => 'CommentController',
-            'comment' => $comment
+            'comment' => $comment,
         ]);
     }
 }
