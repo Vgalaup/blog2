@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <title>{% block title %}Awesome Blog{% endblock %}</title>
     {% block stylesheets %}
-    <Link rel="styleSheet" href="{{asset('css/bootstrap.min.css')}}" type="text/css" />
+    <Link rel="styleSheet" href="{{ asset('css/main.css') }}" type="text/css" />
+    <Link rel="styleSheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css" />
     {% endblock %}
-    <Link rel="styleSheet" href="{{asset('css/style.css')}}" type="text/css" />
 
 
 </head>
@@ -17,7 +17,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{path('home')}}">An Awesome Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">

@@ -12,21 +12,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/searchingElement/{id}', name: 'searchElement')]
-    public function AddElementToSearch(SessionInterface $session, ManagerRegistry $doctrine, int $id): Response
-    {
-        $session = [];
-        $element = $doctrine->getRepository(Category::class)->find($id);
-        if (in_array($element, $session)) {
-        } else {
-            $session[] = $element;
-        }
+    // #[Route('/searchingElement/{id}', name: 'searchElement')]
+    // public function AddElementToSearch(SessionInterface $session, ManagerRegistry $doctrine, int $id): Response
+    // {
+    //     $session = [];
+    //     $element = $doctrine->getRepository(Category::class)->find($id);
+    //     if (in_array($element, $session)) {
+    //     } else {
+    //         $session[] = $element;
+    //     }
 
 
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
-    }
+    //     return $this->render('home/index.html.twig', [
+    //     ]);
+    // }
 
     #[Route('/', name: 'home')]
     public function index(ManagerRegistry $doctrine): Response
@@ -35,7 +34,6 @@ class HomeController extends AbstractController
         $categories = $doctrine->getRepository(Category::class)->findAll();
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
             'posts' => $posts,
             'categories' => $categories
         ]);
