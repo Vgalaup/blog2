@@ -10,7 +10,7 @@
             <div class="card-body">
                 <h3 class="card-title">{{post.title}}</h3>
                 {% if post.image != "" %}
-                <img class="card-img-top" src="{{ asset('images/') ~ post.image }}">
+                <img class="card-img-top" src="{{ asset('images/') ~ post.image }}" alt="{{post.title}}">
                 {% endif %}
                 <p class="card-text">{{post.content|slice(0, 250)}}
                     {% if post.content|length >250 %}

@@ -6,7 +6,7 @@
 <div class="container">
     <h1>{{post.title}}</h1>
     {% if post.image != "" %}
-    <img class="one-post-image" src="{{ asset('images/') ~ post.image }}">
+    <img class="one-post-image" src="{{ asset('images/') ~ post.image }} " alt="{{post.title}}">
     {% endif %}
     <p>{{post.content}}</p>
 
